@@ -17,4 +17,12 @@
     <td>15/7/20</td>
     <td><a href="https://codeforces.com/contest/427/submission/86925395">view</a></td>
   </tr>
+  <tr>
+    <td>2</td>
+    <td>Submerging Island</td>
+    <td>https://www.spoj.com/problems/SUBMERGE/</td>
+    <td>Tarjan's (Articulation Points)</td>
+    <td>16/7/20</td>
+    <td><a href="https://ideone.com/">view</a></td>
+  </tr>
   </table>
