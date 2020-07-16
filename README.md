@@ -23,6 +23,6 @@
     <td>https://www.spoj.com/problems/SUBMERGE/</td>
     <td>Tarjan's (Articulation Points)</td>
     <td>16/7/20</td>
-    <td><a href="https://ideone.com/">view</a></td>
+    <td><a href="https://github.com/Enigmahaxx/Graph/blob/master/codes/submerge.cpp">view</a></td>
   </tr>
   </table>
