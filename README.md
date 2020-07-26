@@ -25,4 +25,12 @@
     <td>16/7/20</td>
     <td><a href="https://github.com/Enigmahaxx/Graph/blob/master/codes/submerge.cpp">view</a></td>
   </tr>
+  <tr>
+    <td>3</td>
+    <td>Goods Travel</td>
+    <td>https://www.spoj.com/problems/GOODA/</td>
+    <td>SCC compression and bfs</td>
+    <td>26/7/20</td>
+    <td><a href="">view</a></td>
+  </tr>
   </table>
