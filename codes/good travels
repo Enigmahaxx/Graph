@@ -1,0 +1,116 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+
+vector<ll> g[1000004];
+vector<ll> gr[1000004];
+vector<bool> used;
+vector<ll> order, component;
+
+void dfs1(int v)
+{
+    used[v] = true;
+    for (size_t i = 0; i < g[v].size(); ++i)
+        if (!used[g[v][i]])
+            dfs1(g[v][i]);
+    order.push_back(v);
+}
+
+void dfs2(int v)
+{
+    used[v] = true;
+    component.push_back(v);
+    for (size_t i = 0; i < gr[v].size(); ++i)
+        if (!used[gr[v][i]])
+            dfs2(gr[v][i]);
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ll n, m, s, e;
+    cin >> n >> m >> s >> e;
+    s--;
+    e--;
+    ll val[n + 1] = {0};
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> val[i];
+    }
+    ll x, y;
+    for (ll i = 0; i < m; i++)
+    {
+        cin >> x >> y;
+        x--;
+        y--;
+        g[x].push_back(y);
+        gr[y].push_back(x);
+    }
+    used.assign(n, false);
+    for (int i = 0; i < n; ++i)
+        if (!used[i])
+            dfs1(i);
+
+    used.assign(n, false);
+
+    ll comp[n + 1] = {0};
+    ll value[n + 1] = {0};
+    for (int i = 0; i < n; ++i)
+    {
+        int v = order[n - 1 - i];
+        if (!used[v])
+        {
+            dfs2(v);
+            // cout<<"& "<<v<<endl;
+            for (auto j : component)
+            {
+                // cout<<"* "<<j<<" ";
+                comp[j] = v;
+                value[v] += val[j];
+            }
+            component.clear();
+            // cout<<endl;
+        }
+    }
+    set<ll> ng[n + 1];
+    for (ll i = 0; i < n; i++)
+    {
+        if (g[i].size() > 0)
+        {
+            for (auto j : g[i])
+            {
+                if(comp[j]!=comp[i])
+                ng[comp[i]].insert(comp[j]);
+            }
+        }
+    }
+    bool vis[n + 1];
+    memset(vis, false, sizeof(vis));
+    queue<ll> q;
+    ll ans[n+1]={0};
+    q.push(comp[s]);
+    ans[comp[s]] = value[comp[s]];
+    // cout<<"@ "<<comp[s]<<" "<<value[comp[s]]<<endl;
+    while (q.size() > 0)
+    {
+        x = q.front();
+        q.pop();
+        if (vis[x] == false)
+        {
+            vis[x] = true;
+            if (ng[x].size() > 0)
+            {
+                for (auto i : ng[x])
+                {
+                    // cout<<"% "<<i<<" ";
+                    // cout<<"# "<<comp[i]<<" "<<value[comp[i]]<<endl;
+                    ans[i]=max(ans[i],value[i]+ans[x]);
+                    q.push(i);
+                }
+            }
+        }
+    }
+    cout<<ans[comp[e]]<<endl;
+}
